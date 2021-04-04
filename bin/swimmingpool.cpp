@@ -1,42 +1,26 @@
-/**
- * @file swimmingpool.cpp
- *
- * @version 01.01 202144
- *
- * @brief https://training.olinfo.it/#/task/ois_swimmingpool/statement
- *
- * @ingroup swimmingpool
- * (Note: this needs exactly one @defgroup somewhere)
- *
- * @author Castellani Davide
- *
- * Contact: contacts@castellanidavide.it
- *
- */
-
-// Includes
 #include <bits/stdc++.h>
 using namespace std;
 
-// Variabiles
-int N;
+vector <int> values;
 
-// Main code
-int main()
-{
-  // Cncomment the following lines if you want to read/write from files
-  // freopen("input.txt", "r", stdin);
-  // freopen("output.txt", "w", stdout);
+int N, middle, ub, d1, d2;
 
-  // Input
-  cin >> N;
+int main() {
+    cin >> N;
+    values.resize(N);
 
-  // Code
-  // ...
+    for(size_t i=0; i<N; i++)
+        cin >> values[i];
 
-  // Output
-  cout << N << endl;
+    sort(values.begin(), values.end());
 
-  // End
-  return 0;
+    middle = (values[0] + values[values.size() - 1]) / 2;
+
+    ub = upper_bound(values.begin(), values.end(), middle) - values.begin();
+
+    d1 = max(values[ub]   - values[0], values[values.size() - 1] - values[ub]);
+    d2 = max(values[ub-1] - values[0], values[values.size() - 1] - values[ub-1]);
+
+    printf("%d\n", min(d1, d2)); // print the result
+    return 0;
 }
